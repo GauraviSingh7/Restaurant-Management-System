@@ -11,7 +11,9 @@ const Navbar = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("role");
         setRole(null);  // ✅ Instantly update role state
-        navigate("/login");
+        setTimeout(() => {
+            navigate("/login");
+        }, 100);
     };
 
     // Determine the logo link based on role
