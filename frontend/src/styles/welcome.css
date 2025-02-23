@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Yrsa:ital,wght@0,300..700;1,300..700&display=swap');
+
+body, html{
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+/* Welcome Page Styles */
+
+.welcome-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #F8F5ED;
+}
+
+.welcome-content {
+  padding: 0.5%; /* Shift content slightly left and right */
+  display: flex;
+  width: 80%;
+  max-width: 1200px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.text-section {
+  margin-left: -5%; /* Move text slightly to the left */
+  flex: 1;
+  text-align: center;
+}
+
+.title {
+  font-size: 5rem;
+  font-weight: bold;
+  font-family: 'Amatic SC', cursive;
+  color: rgb(25,33,38);
+}
+
+.subtitle {
+  font-size: 2.5rem;
+  font-weight: bold;
+  font-family: 'Amatic SC', cursive;
+  color: rgb(0,0,0);
+  margin: 20px 0;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.menu-button, .login-button, .register-button {
+  text-decoration: none; 
+  font-weight: bold;
+  font-family: 'Amatic SC';
+  color: rgb(0, 0, 0);
+  background-color: #88BBAF;
+  padding: 5px 24px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 1.3rem;
+  transition: background 0.3s;
+}
+
+.menu-button:hover, .login-button:hover, .register-button:hover {
+  background-color: #88BBAF;
+}
+
+.register-section {
+  margin-top: 15px;
+}
+
+.image-section {
+  margin-right: -8%; /* Move image slightly to the right */
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.cafe-image {
+  max-height: 100vh;
+  margin-right: -8%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.small-btn-text{
+  font-size: 1.7rem;
+  margin-top: 10px;
+  font-weight: bold;
+  font-family: 'Amatic SC', cursive;
+  color: rgb(0,0,0);
+}

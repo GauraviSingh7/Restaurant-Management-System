@@ -1,0 +1,112 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Full-page background */
+body, html {
+    margin: 0;
+    padding: 0;
+    background-color: #f8f5ed !important;
+    overflow-x: hidden; /* No horizontal overflow */
+    height: 100%;
+}
+
+/* Menu Page */
+.menu-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: -30px;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Center the title */
+.menu-title {
+    font-size: 4.5rem;
+    font-weight: bold;
+    font-family: 'Amatic SC', cursive;
+    color: #333;
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+/* Category Buttons */
+.category-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.category-btn {
+    background-color: #e47b5e;
+    color: black;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1.4rem;
+    font-family: 'Amatic SC', cursive;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.category-btn:hover, .category-btn.active {
+    background-color: #d66849;
+}
+
+/* Menu Items */
+.menu-items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    max-height: 60vh; /* Adjust this height for scroll area */
+    overflow-y: auto; /* Enable scrolling within this section */
+}
+
+/* Scrollbar for Menu Items */
+.menu-items::-webkit-scrollbar {
+    width: 10px;
+}
+
+.menu-items::-webkit-scrollbar-thumb {
+    background-color: #ef947a;
+    border-radius: 10px;
+}
+
+.menu-items::-webkit-scrollbar-track {
+    background-color: #f8f5ed;
+}
+
+/* Menu Item Cards */
+.menu-card {
+    background: #f8f5ed;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 15px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    text-align: center;
+    max-width: 500px;
+}
+
+/* Price Styling */
+.price {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Message when no items are selected */
+.no-items {
+    font-size: 2rem;
+    color: #555;
+    text-align: center;
+    margin-top: -10px;
+    font-family: 'Amatic SC', cursive;
+    font-weight: bold;
+}
