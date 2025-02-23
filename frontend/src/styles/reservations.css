@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Yrsa:ital,wght@0,300..700;1,300..700&display=swap');
+
+
+/* Full-page background */
+body, html {
+    margin: 0;
+    padding: 0;
+    background-color: #f8f5ed;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100%;
+}
+
+/* Reservations Page */
+.reservations-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Title */
+.reservations-title {
+    font-size: 4.5rem;
+    font-weight: bold;
+    font-family: 'Amatic SC', cursive;
+    color: #333;
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+/* Form */
+.reservation-form {
+    background: #f8f5ed;
+    font-family: 'Amatic SC', cursive;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: center;
+}
+
+label {
+    font-family: 'Amatic SC', cursive;
+    font-weight: bold;
+    font-size: 2.3rem;
+    display: block;
+    margin: 10px 0;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    font-size: 2rem;
+    font-weight:bold;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Reserve Button */
+.reserve-btn {
+    background-color: #a8c3b4;
+    color: black;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1.4rem;
+    font-family: 'Amatic SC', cursive;
+    font-weight: bold;
+    transition: background 0.3s;
+    margin-top: 15px;
+}
+
+.reserve-btn:hover {
+    background-color: #88BBAF;
+}
+
+/* Reservation Details */
+.reservation-details {
+    margin-top: 20px;
+    padding: 15px;
+    background: #d4edda;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+}
