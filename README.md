@@ -32,8 +32,8 @@ cd Restaurant-Management-System/backend
 python -m venv venv
 source venv/bin/activate  # On Windows use `venv\Scripts\activate`
 
-# Install dependencies
-pip install -r requirements.txt (will be added soon)
+# Install dependencies (will be added soon)
+pip install -r requirements.txt
 
 # Set up database (Update MySQL credentials in .env file)
 python db.py
