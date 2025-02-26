@@ -76,8 +76,8 @@ const Reservations = () => {
                     {reservationDetails && (
                         <div className="reservation-details">
                             <h3>Reservation Confirmed</h3>
-                            <p><strong>Table ID:</strong> {reservationDetails.table_id}</p>
-                            <p><strong>Status:</strong> Pending</p>
+                            <p>Table ID:{reservationDetails.table_id}</p>
+                            <p>Status:Reserved</p>
                         </div>
                     )}
                 </div>

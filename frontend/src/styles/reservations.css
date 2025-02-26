@@ -7,7 +7,6 @@ body, html {
     padding: 0;
     background-color: #f8f5ed;
     overflow-x: hidden;
-    overflow-y: auto;
     height: 100%;
 }
 
@@ -28,7 +27,7 @@ body, html {
     font-family: 'Amatic SC', cursive;
     color: #333;
     text-align: center;
-    margin-top: 40px;
+    margin-top: 15px;
     margin-bottom: 20px;
 }
 
@@ -37,10 +36,12 @@ body, html {
     background: #f8f5ed;
     font-family: 'Amatic SC', cursive;
     padding: 20px;
+    margin-top:-10px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     width: 400px;
     text-align: center;
+    overflow-y: auto;
 }
 
 label {
@@ -58,7 +59,7 @@ input {
     font-size: 2rem;
     font-weight:bold;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: 2px solid #ccc;
 }
 
 /* Reserve Button */
@@ -83,13 +84,23 @@ input {
 /* Reservation Details */
 .reservation-details {
     margin-top: 20px;
-    padding: 15px;
+    padding: 5px;
     background: #d4edda;
     border-radius: 10px;
     text-align: center;
+    font-weight: bold;
+    font-size: 2rem;
 }
 
 .error-message {
     color: red;
     margin-top: 10px;
+    font-weight:bold;
+}
+
+.reservation-deetCont{
+    display: block;
+    justify-content: space-between;
+    margin-top: 10px;
+    background-color: #88BBAF;
 }
