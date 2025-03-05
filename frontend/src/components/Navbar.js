@@ -5,15 +5,11 @@ import "../App.css";
 
 const Navbar = () => {
     const navigate = useNavigate();
-    const { role, setRole } = useAuth();  // ✅ Get role from Context
+    const { role, logout } = useAuth(); // Use logout method from context
 
     const handleLogout = () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("role");
-        setRole(null);  // ✅ Instantly update role state
-        setTimeout(() => {
-            navigate("/login");
-        }, 100);
+        logout(); // Use the logout method from AuthContext
+        navigate("/login");
     };
 
     // Determine the logo link based on role
