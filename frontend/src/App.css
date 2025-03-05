@@ -1,13 +1,16 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Yrsa:ital,wght@0,300..700;1,300..700&display=swap');
 
 body, html{
   margin: 0;
   padding: 0;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh; /* Changed from height: 100vh */
+  overflow-x: hidden; /* Only prevent horizontal scroll */
+  overflow-y: auto; /* Allow vertical scrolling */
 }
 
+::-webkit-scrollbar{
+  display: none;
+}
 
 /* Login page styling */
 
@@ -15,17 +18,18 @@ body, html{
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 70px); /* Adjust height based on navbar */
+  min-height: calc(100vh - 70px); /* Changed from height to min-height */
   width: 100%;
   background-color: #f8f5ed;
 }
 
 .login-container {
+  margin-top: -20px;
   display: flex;
   justify-content: space-between;
   align-items: center; /* Centers vertically */
   width: 100%;
-  height: 100vh;
+  min-height: 100vh; /* Changed from height to min-height */
   background-color: #f8f5ed;
   font-family: 'Amatic SC', cursive;
 }
@@ -98,6 +102,13 @@ input:focus, select:focus {
   object-fit: contain;
   border-radius: none;
   opacity: 0.98;
+}
+
+/* Add styles for pages that need scrolling */
+.scrollable-page {
+  height: auto;
+  min-height: 100vh;
+  overflow-y: auto;
 }
 
 /* **************************************************************************************************** */
