@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useAuth } from "../context/AuthContext";  // ✅ Import AuthContext
-import "../App.css"; // Import the custom CSS
+import { useAuth } from "../context/AuthContext";
+import "../App.css";
 
 const Login = () => {
-    const { setRole } = useAuth();  // ✅ Use Context to update role globally
+    const { login } = useAuth();  // Use the new login method from context
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [role, setRoleLocal] = useState("");
@@ -24,17 +24,15 @@ const Login = () => {
                 { withCredentials: true }
             );
 
-            console.log("Login Response:", response.data);  // Debugging
+            console.log("Login Response:", response.data);
 
-            // ✅ Ensure token is stored
+            // Use the login method from AuthContext
             if (response.data.access_token) {
-                localStorage.setItem("token", response.data.access_token);
-                localStorage.setItem("role", response.data.role);
-                setRole(response.data.role);  // ✅ Update Context so Navbar updates instantly
+                login(response.data.access_token, response.data.role);
                 alert("Login Successful!");
 
                 // Redirect user based on role
-                navigate(response.data.role === "customer" ? "/CustomerDashboard" : "/ManagerDashboard");
+                navigate(response.data.role === "customer" ? "/dashboard" : "/dashboard");
             } else {
                 alert("No token received from server!");
             }

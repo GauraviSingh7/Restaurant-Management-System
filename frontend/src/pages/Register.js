@@ -1,14 +1,24 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import "../styles/register.css"; // Make sure to create this CSS file for styling
+import { useAuth } from "../context/AuthContext";
+import "../styles/register.css";
 
 const Register = () => {
+    const { login } = useAuth();  // Add login method from context
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [role, setRole] = useState("");
+    const navigate = useNavigate();
 
     const handleRegister = async () => {
+        // Input validation
+        if (!name || !email || !password || !role) {
+            alert("Please fill in all fields.");
+            return;
+        }
+
         try {
             const response = await axios.post("http://127.0.0.1:5000/auth/register", {
                 name,
@@ -16,9 +26,23 @@ const Register = () => {
                 password,
                 role
             });
+
             console.log(response.data);
-            alert("Registration Successful!");
+            
+            // Automatically login after successful registration
+            const loginResponse = await axios.post(
+                "http://127.0.0.1:5000/auth/login", 
+                { email, password, role },
+                { withCredentials: true }
+            );
+
+            if (loginResponse.data.access_token) {
+                login(loginResponse.data.access_token, loginResponse.data.role);
+                alert("Registration and Login Successful!");
+                navigate("/dashboard");
+            }
         } catch (error) {
+            console.error("Registration Error:", error.response?.data?.error || error);
             alert(error.response?.data?.error || "Registration Failed");
         }
     };
@@ -62,6 +86,7 @@ const Register = () => {
                         Select a role
                     </option>
                     <option value="customer">Customer</option>
+                    <option value="manager">Manager</option>
                 </select>
                 <button className="register-btn" onClick={handleRegister}>
                     REGISTER
@@ -70,7 +95,6 @@ const Register = () => {
 
             <img
                 src={require("../assets/registerPizza.jpeg")} 
-
                 alt="Register Illustration"
                 className="register-image"
             />
