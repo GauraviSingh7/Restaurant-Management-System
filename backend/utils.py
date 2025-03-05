@@ -19,6 +19,8 @@ def role_required(allowed_roles):
         @wraps(func)
         def wrapper(*args, **kwargs):
             token = request.headers.get("Authorization")  # Get token from headers
+            print(f"Received Authorization Header: {token}")  # Debugging
+
             if not token:
                 return jsonify({"error": "Missing token"}), 403
             
@@ -30,6 +32,7 @@ def role_required(allowed_roles):
 
                 user_data = json.loads(decoded_token["sub"]) if isinstance(decoded_token["sub"], str) else decoded_token["sub"]
                 user_role = user_data.get("role")
+                print(f"User Role: {user_role}, Allowed Roles: {allowed_roles}")
 
                 if user_role not in allowed_roles:
                     return jsonify({"error": "Forbidden: You don't have permission."}), 403

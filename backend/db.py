@@ -2,7 +2,6 @@ import os
 import pymysql
 from dotenv import load_dotenv  # Load dotenv to read .env file
 
-# Load environment variables from .env
 load_dotenv()
 
 # Connect to MySQL using values from .env
