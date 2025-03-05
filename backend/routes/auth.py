@@ -10,7 +10,7 @@ auth_bp = Blueprint("auth", __name__)
 @auth_bp.route("/register", methods=["POST"])
 def register():
     data = request.get_json()
-    allowed_roles = ["customer"]
+    allowed_roles = ["customer", "manager"]
     if data["role"] not in allowed_roles:
         return jsonify({"error": "Invalid Role"}), 400
 
