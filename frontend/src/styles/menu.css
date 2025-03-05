@@ -6,19 +6,21 @@ body, html {
     margin: 0;
     padding: 0;
     background-color: #f8f5ed !important;
-    overflow-x: hidden; /* No horizontal overflow */
-    height: 100%;
+    overflow-x: hidden;
+    min-height: 100%; /* Changed from height: 100% */
 }
+
 
 /* Menu Page */
 .menu-page {
+    margin-top: -20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    margin-top: -30px;
     min-height: 100vh;
     padding: 20px;
+    padding-top: 90px; /* Added to account for navbar height */
 }
 
 /* Center the title */
@@ -28,8 +30,7 @@ body, html {
     font-family: 'Amatic SC', cursive;
     color: #333;
     text-align: center;
-    margin-top: 40px;
-    margin-bottom: 20px;
+    margin: 40px 0 20px 0;
 }
 
 /* Category Buttons */
@@ -58,30 +59,18 @@ body, html {
     background-color: #d66849;
 }
 
-/* Menu Items */
+/* Menu Items - Full page scrolling */
 .menu-items {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
     padding: 10px;
-    max-height: 60vh; /* Adjust this height for scroll area */
-    overflow-y: auto; /* Enable scrolling within this section */
+    /* Removed max-height and overflow-y */
 }
 
-/* Scrollbar for Menu Items */
-.menu-items::-webkit-scrollbar {
-    width: 10px;
-}
-
-.menu-items::-webkit-scrollbar-thumb {
-    background-color: #ef947a;
-    border-radius: 10px;
-}
-
-.menu-items::-webkit-scrollbar-track {
-    background-color: #f8f5ed;
-}
+/* Remove the scrollbar styles for menu-items as they're no longer needed */
+/* Instead, the browser's default scrolling behavior will apply to the whole page */
 
 /* Menu Item Cards */
 .menu-card {
@@ -93,12 +82,37 @@ body, html {
     width: 80%;
     text-align: center;
     max-width: 500px;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.menu-card:hover {
+    transform: translateY(-5px);
 }
 
 /* Price Styling */
 .price {
     font-weight: bold;
     color: #333;
+    font-size: 1.2rem;
+}
+
+.description {
+    color: #555;
+    font-style: italic;
+    margin: 10px 0;
+}
+
+/* Loading and Error Messages */
+.loading, .error {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #555;
+    margin: 30px 0;
+}
+
+.error {
+    color: #ff6b6b;
 }
 
 /* Message when no items are selected */
@@ -106,7 +120,118 @@ body, html {
     font-size: 2rem;
     color: #555;
     text-align: center;
-    margin-top: -10px;
     font-family: 'Amatic SC', cursive;
     font-weight: bold;
 }
+
+/* Manager Buttons (Edit & Delete) */
+.manager-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.edit-btn, .delete-btn {
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.edit-btn {
+    background-color: #EEBD5D;
+    color: black;
+}
+
+.edit-btn:hover {
+    background-color: #e6b450;
+}
+
+.delete-btn {
+    background-color: #ff6b6b;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #e45a5a;
+}
+
+/* Add Button (for Managers) */
+.add-btn {
+    background-color: #88BBAF;
+    color: black;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1.4rem;
+    font-family: 'Amatic SC', cursive;
+    font-weight: bold;
+    transition: background 0.3s;
+    margin-bottom: 20px;
+}
+
+.add-btn:hover {
+    background-color: #3e8e41;
+}
+
+/* Customer-specific styles */
+.customer-view .menu-card {
+    border-left: 5px solid #e47b5e;
+}
+
+.order-btn {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: background 0.3s ease;
+}
+
+.order-btn:hover {
+    background-color: #3e8e41;
+}
+
+/* Manager-specific styles */
+.manager-view .menu-card {
+    border-left: 5px solid #4caf50;
+}
+
+.availability {
+    margin: 5px 0;
+}
+
+.available {
+    color: #4caf50;
+    font-weight: bold;
+}
+
+.unavailable {
+    color: #ff6b6b;
+    font-weight: bold;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .menu-title {
+        font-size: 3rem;
+    }
+    
+    .category-btn {
+        font-size: 1.2rem;
+        padding: 10px 15px;
+    }
+    
+    .menu-card {
+        width: 90%;
+    }
+}
+

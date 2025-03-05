@@ -3,8 +3,7 @@
 body, html{
   margin: 0;
   padding: 0;
-  height: 100vh;
-  overflow: hidden;
+  /* Removed height: 100vh and overflow: hidden */
 }
 
 .main-Regcontainer {
@@ -71,4 +70,3 @@ body, html{
 .input-field:focus {
   border-color: #d66849;
 }
-  
