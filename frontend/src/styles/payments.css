@@ -1,0 +1,114 @@
+/* PaymentsPage.css - Matches Color Scheme */
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap');
+
+.payments-container {
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top: 40px;
+  padding: 20px;
+  font-family: 'Amatic SC', cursive;
+  background-color: #f8f5ed;
+  text-align: center;
+}
+
+.payments-title {
+  font-size: 4.5rem;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+}
+
+.payments-subtitle{
+    margin-top: 20px;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+}
+
+.payments-form {
+  background: #f8f5ed;
+  font-family: 'Amatic SC', cursive;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.payments-input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 2rem;
+  font-weight: bold;
+  border-radius: 5px;
+  border: 2px solid #ccc;
+}
+
+.payments-btn {
+  background-color: #e47b5e;
+  color: black;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  margin: 5px;
+  font-family: 'Amatic SC', cursive;
+  font-weight: bold;
+  transition: background 0.3s;
+  margin-top: 15px;
+}
+
+.payments-btn:hover {
+  background-color: #d66849;
+}
+
+.payments-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.payments-table th, .payments-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.payments-table th {
+  background-color: #f9fafb;
+  font-weight: bold;
+}
+
+.payments-table tr:hover {
+  background-color: #f3f4f6;
+}
+
+@media (max-width: 768px) {
+  .payments-container {
+    width: 90%;
+  }
+
+  .payments-title {
+    font-size: 3rem;
+  }
+
+  .payments-input {
+    font-size: 1.5rem;
+  }
+
+  .payments-btn {
+    font-size: 1.2rem;
+  }
+
+  .payments-table th, .payments-table td {
+    font-size: 14px;
+    padding: 8px;
+  }
+}

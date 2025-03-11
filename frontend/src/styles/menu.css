@@ -6,7 +6,7 @@ body, html {
     margin: 0;
     padding: 0;
     background-color: #f8f5ed !important;
-    overflow-x: hidden;
+    /* overflow: hidden; */
     min-height: 100%; /* Changed from height: 100% */
 }
 

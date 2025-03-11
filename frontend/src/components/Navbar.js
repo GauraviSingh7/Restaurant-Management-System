@@ -15,9 +15,9 @@ const Navbar = () => {
     // Determine the logo link based on role
     let logoLink = "/";
     if (role === "customer") {
-        logoLink = "/CustomerDashboard";
+        logoLink = "/dashboard";
     } else if (role === "manager") {
-        logoLink = "/managerDashboard";
+        logoLink = "/dashboard";
     }
 
     return (

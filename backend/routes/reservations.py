@@ -18,32 +18,51 @@ def make_reservation():
         if not all([capacity, reservation_time]):
             return jsonify({"error": "Missing required fields"}), 400
 
-        # Extract email from JWT token
+        # Extract user ID from JWT token
         current_user = get_jwt_identity()
         user_data = json.loads(current_user)
         customer_email = user_data["email"]
 
-        # Fetch customer_id from users table using email
+        # Get customer_id
         cursor.execute("SELECT user_id FROM users WHERE email = %s", (customer_email,))
         customer = cursor.fetchone()
-
         if not customer:
             return jsonify({"error": "Customer not found"}), 404
-
         customer_id = customer[0]
 
-        # Create a new table dynamically for the reservation
+        # Check if the user already has a reservation at the same time
         cursor.execute(
-            "INSERT INTO tables (capacity, status) VALUES (%s, 'reserved')",
+            "SELECT * FROM reservations WHERE customer_id = %s AND reservation_time = %s",
+            (customer_id, reservation_time)
+        )
+        existing_reservation = cursor.fetchone()
+        if existing_reservation:
+            return jsonify({"error": "You already have a reservation at this time"}), 400
+
+        # Find the best available table (smallest suitable capacity)
+        cursor.execute(
+            """
+            SELECT table_id FROM tables 
+            WHERE capacity >= %s AND status = 'available' 
+            ORDER BY ASC LIMIT 1
+            """,
             (capacity,)
+        )
+        table = cursor.fetchone()
+
+        if not table:
+            return jsonify({"error": "No available tables matching your capacity"}), 400
+
+        table_id = table[0]
+
+        # Mark table as reserved
+        cursor.execute(
+            "UPDATE tables SET status = 'reserved' WHERE table_id = %s",
+            (table_id,)
         )
         db.commit()
 
-        # Get the newly created table_id
-        cursor.execute("SELECT LAST_INSERT_ID()")
-        table_id = cursor.fetchone()[0]
-
-        # Insert reservation into the reservations table
+        # Insert reservation
         cursor.execute(
             """
             INSERT INTO reservations (customer_id, table_id, reservation_time, capacity, status)
@@ -53,11 +72,41 @@ def make_reservation():
         )
         db.commit()
 
-        return jsonify({"message": "Reservation made", "table_id": table_id}), 201
+        return jsonify({"message": "Reservation successful", "table_id": table_id}), 201
 
     except Exception as e:
         db.rollback()
         return jsonify({"error": str(e)}), 500
+
+
+@reservations_bp.route("/cancel/<int:reservation_id>", methods=["DELETE"])
+@jwt_required()
+@role_required(["customer"])
+def cancel_reservation(reservation_id):
+    try:
+        # Get the reservation details
+        cursor.execute("SELECT table_id FROM reservations WHERE reservation_id = %s", (reservation_id,))
+        reservation = cursor.fetchone()
+
+        if not reservation:
+            return jsonify({"error": "Reservation not found"}), 404
+
+        table_id = reservation[0]
+
+        # Delete the reservation
+        cursor.execute("DELETE FROM reservations WHERE reservation_id = %s", (reservation_id,))
+        db.commit()
+
+        # Update table status to available
+        cursor.execute("UPDATE tables SET status = 'available' WHERE table_id = %s", (table_id,))
+        db.commit()
+
+        return jsonify({"message": "Reservation deleted and table is now available"}), 200
+
+    except Exception as e:
+        db.rollback()
+        return jsonify({"error": str(e)}), 500
+
 
 
 @reservations_bp.route("/<int:reservation_id>/status", methods=["PUT"])
@@ -77,4 +126,56 @@ def update_reservation_status(reservation_id):
         return jsonify({"message": "Reservation status updated"}), 200
 
     except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@reservations_bp.route("/", methods=["GET"])
+@jwt_required()
+@role_required(["customer"])
+def get_user_reservations():
+    try:
+        print("Fetching user reservations...")  # Debug print
+
+        # Extract user ID from JWT token
+        current_user = get_jwt_identity()
+        user_data = json.loads(current_user)
+        customer_email = user_data["email"]
+
+        # Get customer_id
+        cursor.execute("SELECT user_id FROM users WHERE email = %s", (customer_email,))
+        customer = cursor.fetchone()
+        if not customer:
+            print("Customer not found!")  # Debug print
+            return jsonify({"error": "Customer not found"}), 404
+        customer_id = customer[0]
+
+        # Fetch reservations along with table number
+        cursor.execute(
+            """
+            SELECT r.reservation_id, r.table_id, t.capacity, r.reservation_time, r.status
+            FROM reservations r
+            JOIN tables t ON r.table_id = t.table_id
+            WHERE r.customer_id = %s
+            ORDER BY r.reservation_time DESC
+            """,
+            (customer_id,)
+        )
+        reservations = cursor.fetchall()
+
+        # Convert result tuples to JSON objects
+        reservations_list = []
+        for res in reservations:
+            reservations_list.append({
+                "reservation_id": res[0],
+                "table_id": res[1],
+                "capacity": res[2],
+                "reservation_time": res[3],
+                "status": res[4]
+            })
+
+        print("Reservations Fetched:", reservations_list)  # Debug print
+
+        return jsonify(reservations_list), 200
+
+    except Exception as e:
+        print("Error:", str(e))  # Debug print
         return jsonify({"error": str(e)}), 500

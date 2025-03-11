@@ -1,106 +1,149 @@
-@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Yrsa:ital,wght@0,300..700;1,300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Roboto:wght@100..900&family=Yrsa:wght@300..700&display=swap');
 
-
-/* Full-page background */
 body, html {
     margin: 0;
     padding: 0;
-    background-color: #f8f5ed;
-    overflow-x: hidden;
-    min-height: 100%;
+    font-family: 'Amatic SC';
+    background-color: #f8f5ed; /* Matches other pages */
 }
 
-/* Reservations Page */
-.reservations-page {
-    margin-top:-50px;
+/* Main Reservations Container */
+.reservations-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    min-height: 100vh;
-    padding: 20px;
-    padding-top: 70px;
+    justify-content: space-between;
+    font-family: 'Amatic SC';
+    align-items: flex-start;
+    padding: 2rem;
+    font-size: 18px;
+}
+
+/* Left Section - Booking Form */
+.reservations-form-container {
+    flex: 1;
+    max-width: 450px;
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .reservations-title {
-    font-size: 4.5rem;
+    font-size: 60px;
     font-weight: bold;
-    font-family: 'Amatic SC', cursive;
+    margin-bottom: 1rem;
+    text-align: center;
     color: #333;
-    text-align: center;
-    margin-top: 15px;
-    margin-bottom: 20px;
 }
 
-.reservation-form {
-    background: #f8f5ed;
-    font-family: 'Amatic SC', cursive;
-    padding: 20px;
-    margin-top:-10px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 400px;
-    text-align: center;
-    overflow-y: auto;
-}
-
-label {
-    font-family: 'Amatic SC', cursive;
-    font-weight: bold;
-    font-size: 2.3rem;
+/* Labels */
+.reservations-label {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
     display: block;
-    margin: 10px 0;
 }
 
-input {
+/* Inputs */
+.reservations-input {
     width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    font-size: 2rem;
-    font-weight:bold;
+    padding: 0.8rem;
+    font-size: 18px;
+    border: 2px solid #88BBAF;
     border-radius: 5px;
-    border: 2px solid #ccc;
+    margin-bottom: 1rem;
 }
 
-/* Reserve Button */
-.reserve-btn {
-    background-color: #a8c3b4;
+.reservations-input:focus {
+    border-color: #88BBAF;
+}
+
+/* Buttons */
+.reservations-btn {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 24px;
+    font-weight: bold;
+    background-color: #88BBAF;
     color: black;
-    padding: 12px 25px;
     border: none;
-    border-radius: 25px;
+    border-radius: 20px;
     cursor: pointer;
-    font-size: 1.4rem;
-    font-family: 'Amatic SC', cursive;
-    font-weight: bold;
-    transition: background 0.3s;
-    margin-top: 15px;
-}
-
-.reserve-btn:hover {
-    background-color: #88BBAF;
-}
-
-/* Reservation Details */
-.reservation-details {
-    margin-top: 20px;
-    padding: 5px;
-    background: #d4edda;
-    border-radius: 10px;
+    transition: background 0.3s ease;
     text-align: center;
+}
+
+.reservations-btn:hover {
+    background-color: #5a9484;
+}
+
+/* Right Section - Reservations List */
+.reservations-right {
+    flex: 1.2;
+    max-width: 550px;
+}
+
+/* Toggle Buttons */
+.reservations-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 1rem;
+}
+
+.reservations-toggle-btn {
+    background-color: #e47b5e;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.reservations-toggle-btn:hover {
+    background-color: #d66849;
+}
+
+/* Reservation Items */
+.reservations-item {
+    background-color: #f8f5ed;
+    padding: 1rem;
+    border-left: 5px solid #e47b5e;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+/* Reserved Table Section */
+.reservation-details {
+    background-color: #88BBAF; /* Usual green */
+    color: black;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 22px;
     font-weight: bold;
-    font-size: 2rem;
 }
 
-.error-message {
+/* Error Message */
+.reservations-error {
     color: red;
-    margin-top: 10px;
-    font-weight:bold;
+    font-size: 16px;
 }
 
-.reservation-deetCont{
-    display: block;
-    justify-content: space-between;
+.reservations-cancel-btn {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
     margin-top: 10px;
-    background-color: #88BBAF;
+}
+
+.reservations-cancel-btn:hover {
+    background-color: #c9302c;
 }
