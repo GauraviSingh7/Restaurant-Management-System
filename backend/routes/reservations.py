@@ -44,7 +44,7 @@ def make_reservation():
             """
             SELECT table_id FROM tables 
             WHERE capacity >= %s AND status = 'available' 
-            ORDER BY ASC LIMIT 1
+            ORDER BY capacity ASC LIMIT 1
             """,
             (capacity,)
         )

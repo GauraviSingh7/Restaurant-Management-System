@@ -9,20 +9,20 @@ body, html {
 
 /* Main Reservations Container */
 .reservations-container {
-    display: flex;
     justify-content: space-between;
     font-family: 'Amatic SC';
-    align-items: flex-start;
+    align-items: center;
     padding: 2rem;
     font-size: 18px;
 }
 
 /* Left Section - Booking Form */
 .reservations-form-container {
-    flex: 1;
     max-width: 450px;
     background: white;
     padding: 2rem;
+    margin-left: 500px;
+    align-items: center;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -30,7 +30,8 @@ body, html {
 .reservations-title {
     font-size: 60px;
     font-weight: bold;
-    margin-bottom: 1rem;
+    font-size: 5rem;
+    margin-bottom: 2rem;
     text-align: center;
     color: #333;
 }
@@ -57,14 +58,22 @@ body, html {
     border-color: #88BBAF;
 }
 
+.reservations-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 1rem;
+}
 /* Buttons */
 .reservations-btn {
-    width: 100%;
+    width: 20%;
     padding: 0.8rem;
     font-size: 24px;
     font-weight: bold;
     background-color: #88BBAF;
     color: black;
+    align-items: center;
     border: none;
     border-radius: 20px;
     cursor: pointer;
@@ -91,8 +100,8 @@ body, html {
 }
 
 .reservations-toggle-btn {
-    background-color: #e47b5e;
-    color: white;
+    background-color: #88BBAF;
+    color: black;
     border: none;
     padding: 12px 20px;
     font-size: 20px;
@@ -102,25 +111,26 @@ body, html {
 }
 
 .reservations-toggle-btn:hover {
-    background-color: #d66849;
+    background-color: #7aab9f;
 }
 
 /* Reservation Items */
 .reservations-item {
     background-color: #f8f5ed;
     padding: 1rem;
-    border-left: 5px solid #e47b5e;
+    border-left: 5px solid #88BBAF;
     border-radius: 5px;
     margin-bottom: 1rem;
 }
 
 /* Reserved Table Section */
 .reservation-details {
-    background-color: #88BBAF; /* Usual green */
+    background-color: #88BBAF;
     color: black;
     padding: 1rem;
     border-radius: 5px;
     margin-top: 1rem;
+    margin-left: 500px;
     text-align: center;
     font-size: 22px;
     font-weight: bold;
@@ -128,6 +138,7 @@ body, html {
 
 /* Error Message */
 .reservations-error {
+    align-items: center;
     color: red;
     font-size: 16px;
 }
@@ -146,4 +157,8 @@ body, html {
 
 .reservations-cancel-btn:hover {
     background-color: #c9302c;
+}
+
+.reservations-list{
+    margin-left: 650px;
 }

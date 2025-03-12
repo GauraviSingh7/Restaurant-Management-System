@@ -8,12 +8,13 @@ const Reservations = () => {
     const [reservationTime, setReservationTime] = useState("");
     const [capacity, setCapacity] = useState("");
     const [upcomingReservations, setUpcomingReservations] = useState([]);
-    const [showReservations, setShowReservations] = useState();
-    const [viewHistory, setViewHistory] = useState(false);
+    const [reservationHistory, setReservationHistory] = useState([]);
+    const [showReservationForm, setShowReservationForm] = useState(false);
+    const [showReservations, setShowReservations] = useState(false);
+    const [showHistory, setShowHistory] = useState(false);
     const [reservationDetails, setReservationDetails] = useState(null);
     const [error, setError] = useState("");
 
-    // Fetch upcoming reservations
     useEffect(() => {
         if (role === "customer") {
             fetchReservations();
@@ -28,22 +29,22 @@ const Reservations = () => {
                 return;
             }
 
-            const response = await axios.get(
-                "http://127.0.0.1:5000/reservations/",
-                {
-                    headers: { Authorization: `Bearer ${token}` }
-                }
-            );
-            setUpcomingReservations(response.data);
+            const response = await axios.get("http://127.0.0.1:5000/reservations/", {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+
+            const upcoming = response.data.filter(res => res.status !== "cancelled");
+            const history = response.data.filter(res => res.status === "cancelled");
+
+            setUpcomingReservations(upcoming);
+            setReservationHistory(history);
         } catch (error) {
             console.error("Error fetching reservations:", error.response?.data?.error || error);
         }
     };
 
     const handleReserve = async (e) => {
-        if (e) {
-            e.preventDefault();
-        }
+        e.preventDefault();
         setError("");
 
         if (!reservationTime || !capacity) {
@@ -58,21 +59,17 @@ const Reservations = () => {
                 return;
             }
 
-            const response = await axios.post(
-                "http://127.0.0.1:5000/reservations/",
-                {
-                    reservation_time: reservationTime,
-                    capacity: capacity
-                },
-                {
-                    headers: { Authorization: `Bearer ${token}` }
-                }
-            );
+            const response = await axios.post("http://127.0.0.1:5000/reservations/", {
+                reservation_time: reservationTime,
+                capacity: capacity,
+            }, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
 
             setReservationDetails(response.data);
             setReservationTime("");
             setCapacity("");
-            fetchReservations(); // Refresh reservations list
+            fetchReservations();
         } catch (error) {
             console.error("Reservation Error:", error.response?.data?.error || error);
             setError(error.response?.data?.error || "Failed to make reservation");
@@ -80,11 +77,6 @@ const Reservations = () => {
     };
 
     const handleCancelReservation = async (reservationId) => {
-        if (!reservationId) {
-            console.error("Error: Missing reservation ID.");
-            return;
-        }
-
         try {
             const token = localStorage.getItem("token");
             if (!token) {
@@ -96,10 +88,7 @@ const Reservations = () => {
                 headers: { Authorization: `Bearer ${token}` },
             });
 
-            // Remove canceled reservation from the UI
-            setUpcomingReservations((prevReservations) =>
-                prevReservations.filter((res) => res.reservation_id !== reservationId)
-            );
+            fetchReservations();
         } catch (error) {
             console.error("Error canceling reservation:", error.response?.data?.error || error);
         }
@@ -112,12 +101,30 @@ const Reservations = () => {
 
     return (
         <div className="reservations-container">
-            {/* Left: Reservation Form */}
-            <div className="reservations-form-container">
-                <h1 className="reservations-title">Book a Table</h1>
-                {role !== "customer" ? (
-                    <p className="reservations-error">Only customers can make reservations.</p>
-                ) : (
+            <h2 className="reservations-title">Reservations</h2>
+            <div className="reservations-buttons">
+                <button className="reservations-btn" onClick={() => {
+                    setShowReservationForm(true);
+                    setShowReservations(false);
+                    setShowHistory(false);
+                }}>Make a Reservation</button>
+
+                <button className="reservations-btn" onClick={() => {
+                    setShowReservationForm(false);
+                    setShowReservations(true);
+                    setShowHistory(false);
+                }}>Upcoming Reservations</button>
+
+                <button className="reservations-btn" onClick={() => {
+                    setShowReservationForm(false);
+                    setShowReservations(false);
+                    setShowHistory(true);
+                }}>Reservation History</button>
+            </div>
+            {/* Reservation Form */}
+            {showReservationForm && role === "customer" && (
+                <div className="reservations-form-container">
+                    <h3>Book a Table</h3>
                     <form className="reservations-form" onSubmit={handleReserve}>
                         <label className="reservations-label">Reservation Date & Time:</label>
                         <input
@@ -146,60 +153,49 @@ const Reservations = () => {
                             </div>
                         )}
                     </form>
-                )}
-            </div>
-    
-            {/* Right: Reservation Details */}
-            {role === "customer" && (
-                <div className="reservations-right">
-                    <div className="reservations-buttons">
-                        <button
-                            className={`reservations-toggle-btn ${!viewHistory ? 'active' : ''}`}
-                            onClick={() => {
-                                setViewHistory(false);
-                                setShowReservations(!showReservations);
-                            }}
-                        >
-                            Upcoming Reservations
-                        </button>
-                        <button
-                            className={`reservations-toggle-btn ${viewHistory ? 'active' : ''}`}
-                            onClick={() => {
-                                setViewHistory(true);
-                                setShowReservations(!showReservations);
-                            }}
-                        >
-                            Reservation History
-                        </button>
-                    </div>
-    
-                    {/* Upcoming Reservations List */}
-                    {showReservations && (
-                        <div className="reservations-list">
-                            <h2 className="reservations-title">
-                                {viewHistory ? "Reservation History" : "Upcoming Reservations"}
-                            </h2>
-                            {upcomingReservations.length === 0 ? (
-                                <p className="reservations-error">No {viewHistory ? "past" : "upcoming"} reservations.</p>
-                            ) : (
-                                upcomingReservations.map((res, index) => (
-                                    <div key={index} className="reservations-item">
-                                        <p><strong>Date & Time:</strong> {formatDateTime(res.reservation_time)}</p>
-                                        <p><strong>Table:</strong> {res.table_id}</p>
-                                        <p><strong>Capacity:</strong> {res.capacity} People</p>
-                                        <p><strong>Status:</strong> {res.status}</p>
-                                        {res.status !== "cancelled" && (
-                                            <button
-                                                className="reservations-cancel-btn"
-                                                onClick={() => handleCancelReservation(res.reservation_id)}
-                                            >
-                                                Cancel
-                                            </button>
-                                        )}
-                                    </div>
-                                ))
-                            )}
-                        </div>
+                </div>
+            )}
+
+            {/* Upcoming Reservations */}
+            {showReservations && (
+                <div className="reservations-list">
+                    <h3>Upcoming Reservations</h3>
+                    {upcomingReservations.length === 0 ? (
+                        <p className="reservations-error">No upcoming reservations.</p>
+                    ) : (
+                        upcomingReservations.map((res) => (
+                            <div key={res.reservation_id} className="reservations-item">
+                                <p><strong>Date & Time:</strong> {formatDateTime(res.reservation_time)}</p>
+                                <p><strong>Table:</strong> {res.table_id}</p>
+                                <p><strong>Capacity:</strong> {res.capacity} People</p>
+                                <p><strong>Status:</strong> {res.status}</p>
+                                <button
+                                    className="reservations-cancel-btn"
+                                    onClick={() => handleCancelReservation(res.reservation_id)}
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                        ))
+                    )}
+                </div>
+            )}
+
+            {/* Reservation History */}
+            {showHistory && (
+                <div className="reservations-list">
+                    <h3>Reservation History</h3>
+                    {reservationHistory.length === 0 ? (
+                        <p className="reservations-error">No past reservations.</p>
+                    ) : (
+                        reservationHistory.map((res) => (
+                            <div key={res.reservation_id} className="reservations-item">
+                                <p><strong>Date & Time:</strong> {formatDateTime(res.reservation_time)}</p>
+                                <p><strong>Table:</strong> {res.table_id}</p>
+                                <p><strong>Capacity:</strong> {res.capacity} People</p>
+                                <p><strong>Status:</strong> {res.status}</p>
+                            </div>
+                        ))
                     )}
                 </div>
             )}
