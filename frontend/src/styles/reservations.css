@@ -9,6 +9,7 @@ body, html {
 
 /* Main Reservations Container */
 .reservations-container {
+    margin-top: 50px;
     justify-content: space-between;
     font-family: 'Amatic SC';
     align-items: center;
@@ -17,15 +18,16 @@ body, html {
 }
 
 /* Left Section - Booking Form */
-.reservations-form-container {
+/* .reservations-form-container {
     max-width: 450px;
     background: white;
     padding: 2rem;
+    display: block;
     margin-left: 500px;
     align-items: center;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
+} */
 
 .reservations-title {
     font-size: 60px;
@@ -75,10 +77,26 @@ body, html {
     color: black;
     align-items: center;
     border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    text-align: center;
+}
+
+.reservations-reserve-btn{
+    width: 30%;
+    padding: 0.8rem;
+    font-size: 24px;
+    font-weight: bold;
+    background-color: #88BBAF;
+    color: black;
+    align-items: center;
+    border: none;
     border-radius: 20px;
     cursor: pointer;
     transition: background 0.3s ease;
     text-align: center;
+    margin-left: 130px;
 }
 
 .reservations-btn:hover {
@@ -124,16 +142,33 @@ body, html {
 }
 
 /* Reserved Table Section */
+/* Reserved Table Section - Updated */
 .reservation-details {
     background-color: #88BBAF;
     color: black;
     padding: 1rem;
-    border-radius: 5px;
-    margin-top: 1rem;
-    margin-left: 500px;
+    border-radius: 25px;
+    position: absolute;
+    left: 105%;
+    top: 50%;
+    width: 200px;
     text-align: center;
     font-size: 22px;
     font-weight: bold;
+    transform: translateY(-50%);
+}
+
+/* Make the form container position relative */
+.reservations-form-container {
+    max-width: 450px;
+    background: white;
+    padding: 2rem;
+    display: block;
+    margin-left: 500px;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative; /* Add this */
 }
 
 /* Error Message */
@@ -161,4 +196,7 @@ body, html {
 
 .reservations-list{
     margin-left: 650px;
+}
+.h3{
+    font-weight: bold;
 }

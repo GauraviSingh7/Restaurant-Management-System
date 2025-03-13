@@ -143,7 +143,7 @@ const Reservations = () => {
                             min="1"
                             required
                         />
-                        <button type="submit" className="reservations-btn">Reserve Now</button>
+                        <button type="submit" className="reservations-reserve-btn">Reserve Now</button>
                         {error && <p className="reservations-error">{error}</p>}
                         {reservationDetails && (
                             <div className="reservation-details">
