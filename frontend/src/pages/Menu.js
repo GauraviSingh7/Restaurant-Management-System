@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext"; 
+import { useCart } from "../context/CartContext";  // Use CartContext here
 import "../styles/menu.css"; 
 
 const Menu = () => {
     const [categories, setCategories] = useState([]);
     const [menuItems, setMenuItems] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState(null);
-    const { role, token } = useAuth(); 
+    const { role, token } = useAuth();
+    const { addToCart } = useCart();  // Use cart and addToCart from context
 
     console.log("Current Role:", role);
     console.log("Current Token:", token);
@@ -64,6 +66,17 @@ const Menu = () => {
                 console.error("Error adding item:", error.response?.data || error);
                 alert(`Error: ${error.response?.data?.error || 'Unable to add menu item'}`);
             });
+    };
+
+    // Handle Add to Cart (For Customer only)
+    const handleAddToCart = (item) => {
+        if (role !== "customer") {
+            alert("You must be logged in as a customer to add items to your order.");
+            return;
+        }
+
+        addToCart({ ...item, quantity: 1 });  // Use addToCart from CartContext
+        alert(`${item.name} added to your cart!`);
     };
 
     // Handle Edit Menu Item (For Manager)
@@ -152,18 +165,18 @@ const Menu = () => {
                             <h3>{item.name}</h3>
                             <p>{item.description}</p>
                             <p className="price">${item.price.toFixed(2)}</p>
+
+                            {/* Show "Add to Cart" button for Customers */}
+                            {role === "customer" && (
+                                <button className="add-to-cart-btn" onClick={() => handleAddToCart(item)}>Add to Cart</button>
+                            )}
                             
                             {/* Show "Edit" and "Delete" buttons for Managers */}
                             {role === "manager" && (
                                 <div className="manager-buttons">
                                     <button 
                                         className="edit-btn" 
-                                        onClick={() => editMenuItem(
-                                            item.menu_id, 
-                                            item.name, 
-                                            item.description, 
-                                            item.price
-                                        )}
+                                        onClick={() => editMenuItem(item.menu_id, item.name, item.description, item.price)}
                                     >
                                         Edit
                                     </button>
@@ -181,6 +194,7 @@ const Menu = () => {
                     <p className="no-items">Select a category to view menu items.</p>
                 )}
             </div>
+
         </div>
     );
 };

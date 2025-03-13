@@ -59,6 +59,19 @@ body, html {
     background-color: #d66849;
 }
 
+.add-to-cart-btn{
+    background-color: #88BBAF;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    font-size: 1.2rem;
+    border-radius: 20px;
+    font-family: 'Amatic SC', cursive;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
 /* Menu Items - Full page scrolling */
 .menu-items {
     display: flex;
@@ -68,9 +81,6 @@ body, html {
     padding: 10px;
     /* Removed max-height and overflow-y */
 }
-
-/* Remove the scrollbar styles for menu-items as they're no longer needed */
-/* Instead, the browser's default scrolling behavior will apply to the whole page */
 
 /* Menu Item Cards */
 .menu-card {
