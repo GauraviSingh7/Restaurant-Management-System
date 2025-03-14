@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 // Create a context for the cart
 const CartContext = createContext();
@@ -7,21 +7,30 @@ const CartContext = createContext();
 export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
-    const [cart, setCart] = useState([]);
+    // Initialize cart state from localStorage (if available)
+    const [cart, setCart] = useState(() => {
+        const savedCart = localStorage.getItem("cart");
+        return savedCart ? JSON.parse(savedCart) : []; // Parse the cart from localStorage, or return an empty array if none is found
+    });
 
-    // Function to add an item to the cart or update its quantity if it exists
+    // Function to save cart to localStorage whenever it changes
+    useEffect(() => {
+        localStorage.setItem("cart", JSON.stringify(cart));
+    }, [cart]);  // Save cart to localStorage whenever the cart state changes
+
+    // Function to add an item to the cart
     const addToCart = (item, quantity = 1) => {
         setCart((prevCart) => {
-            const existingItemIndex = prevCart.findIndex((cartItem) => cartItem.menu_item_id === item.menu_item_id);
+            const existingItemIndex = prevCart.findIndex(
+                (cartItem) => cartItem.menu_id === item.menu_id
+            );
 
-            // If the item is already in the cart, update its quantity
             if (existingItemIndex !== -1) {
                 const updatedCart = [...prevCart];
                 updatedCart[existingItemIndex].quantity += quantity;
                 return updatedCart;
             }
 
-            // Otherwise, add the new item with the specified quantity
             return [...prevCart, { ...item, quantity }];
         });
     };

@@ -14,7 +14,7 @@ const CustomerDashboard = () => {
 
             <div className="discount-box">
                 <p>
-                    USE CODE: <span class="bold-word">FULLMARKS20</span>
+                    USE CODE: <span className="bold-word">FULLMARKS20</span>
                     <br />
                     TO GET A 100% DISCOUNT!!!
                 </p>

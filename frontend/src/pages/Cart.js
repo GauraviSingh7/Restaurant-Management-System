@@ -17,35 +17,54 @@ const Cart = () => {
         <div className="cart-page">
             <h1>Your Cart</h1>
 
-            {/* If the cart is empty, show a message */}
-            {cart.length === 0 ? (
-                <p>Your cart is empty.</p>
-            ) : (
-                <>
-                    {/* Display cart items */}
-                    {cart.map((item, index) => (
-                        <div key={index} className="cart-item">
-                            <h3>{item.name}</h3>
-                            <p>Price: ${item.price.toFixed(2)}</p>
-                            <p>Quantity: 
-                                <input
-                                    type="number"
-                                    min="1"
-                                    value={item.quantity}
-                                    onChange={(e) => updateCartItem(index, parseInt(e.target.value))}
-                                />
-                            </p>
-                            <button onClick={() => removeFromCart(index)}>Remove</button>
-                        </div>
-                    ))}
+            <div className="cart-content">
+                {/* Cart Items Section */}
+                <div className="cart-items">
+                    {cart.length === 0 ? (
+                        <h2>Your cart is empty. Head to our menu to check our delicious dishes!!</h2>
+                    ) : (
+                        <>
+                            {cart.map((item, index) => (
+                                <div key={index} className="cart-item">
+                                    <h3>{item.name}</h3>
+                                    <h4>
+                                        <input
+                                            type="number"
+                                            min="1"
+                                            value={item.quantity}
+                                            onChange={(e) => updateCartItem(index, parseInt(e.target.value))}
+                                        />
+                                    </h4>
+                                    <h4>${item.price.toFixed(2)}</h4>
+                                    <button className="remove-btn" onClick={() => removeFromCart(index)}>
+                                        Remove
+                                    </button>
+                                </div>
+                            ))}
 
-                    {/* Display total and checkout button */}
-                    <div className="cart-summary">
-                        <h2>Total: ${getTotal().toFixed(2)}</h2>
-                        <button onClick={handleCheckout} className="checkout-btn">Proceed to Checkout</button>
-                    </div>
-                </>
-            )}
+                            {cart.length !== 0 && (
+                                <div className="cart-summary">
+                                    <h2>Total: ${getTotal().toFixed(2)}</h2>
+                                    <button onClick={handleCheckout} className="checkout-btn">
+                                        Proceed to Checkout
+                                    </button>
+                                </div>
+                            )}
+                        </>
+                    )}
+
+                    
+                </div>
+
+                {/* Image Section */}
+                <div className="cart-images">
+                    <img
+                        src={require("../assets/cart.jpeg")} 
+                        alt="Cart"
+                        className="cart-image"
+                    />
+                </div>
+            </div>
         </div>
     );
 };
