@@ -18,15 +18,18 @@ load_dotenv()
 app = Flask(__name__)
 
 app.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET_KEY")  # Ensure this exists in .env
-app.config["JWT_TOKEN_LOCATION"] = [os.getenv("JWT_TOKEN_LOCATION")]  # Usually "headers"
+app.config["JWT_TOKEN_LOCATION"] = ["headers"]  # Usually it's in the headers
 app.config["JWT_ACCESS_TOKEN_EXPIRES"] = False  # Optional: Change based on needs
 
 jwt = JWTManager(app) 
 
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "fallback_secret_key")
 
-cors = CORS(app, supports_credentials=True, resources={r"/*": {"origins": "http://localhost:3000"}})
+# Improved CORS Configuration
+cors = CORS(app, supports_credentials=True, resources={r"/*": {"origins": "http://localhost:3000"}}, 
+            allow_headers=["Authorization", "Content-Type"])
 
+# Debug route to get the user role from JWT token
 @app.route('/get-role', methods=['GET'])
 @jwt_required()
 def get_role():

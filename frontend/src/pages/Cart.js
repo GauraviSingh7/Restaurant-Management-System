@@ -9,7 +9,8 @@ const Cart = () => {
 
     // Handle proceeding to checkout
     const handleCheckout = () => {
-        navigate("/payments");  // Redirect to the Payments page
+        // Navigate to the payments page, passing the cart and total amount
+        navigate("/payments", { state: { cart, totalAmount: getTotal() } });
     };
 
     return (

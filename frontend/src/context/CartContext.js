@@ -9,9 +9,21 @@ export const useCart = () => useContext(CartContext);
 export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
 
-    // Function to add an item to the cart
-    const addToCart = (item) => {
-        setCart((prevCart) => [...prevCart, item]);
+    // Function to add an item to the cart or update its quantity if it exists
+    const addToCart = (item, quantity = 1) => {
+        setCart((prevCart) => {
+            const existingItemIndex = prevCart.findIndex((cartItem) => cartItem.menu_item_id === item.menu_item_id);
+
+            // If the item is already in the cart, update its quantity
+            if (existingItemIndex !== -1) {
+                const updatedCart = [...prevCart];
+                updatedCart[existingItemIndex].quantity += quantity;
+                return updatedCart;
+            }
+
+            // Otherwise, add the new item with the specified quantity
+            return [...prevCart, { ...item, quantity }];
+        });
     };
 
     // Function to update item quantity
