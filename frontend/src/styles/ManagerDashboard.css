@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap');
+
+body, html{
+    margin: 0;
+    padding: 0;
+    /* overflow: hidden; */
+  }
+
+.manager-dashboard {
+    position: relative;
+    min-height: 100vh;
+    background-color: #f8f5ed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-family: 'Amatic SC', cursive;
+}
+
+.bold-word { font-weight: bold; }
+.welcome-message {
+    font-size: 6rem;
+    font-weight: bold;
+    margin-top: 80px;
+    margin-left: -900px;
+}
+
+.desc {
+    position: absolute;
+    right: 90px;
+    bottom: 120px;
+    font-weight: bold;
+    font-size: 3rem;
+    text-align: right;
+}
+
+.discount-box strong {
+    font-style: italic;
+    font-weight: 700;
+}
+
+.dumpling{
+    position: absolute;
+    bottom: 100px;
+    left: 80px;
+    width: 380px;
+}
+
+.Drinks {
+    position: absolute;
+    right: 80px;
+    top: 60px;
+    width: 300px;
+    margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+    .image-left, .image-right {
+        width: 150px;
+        bottom: 20px;
+    }
+    .welcome-message {
+        font-size: 2rem;
+    }
+    .discount-box {
+        font-size: 1.5rem;
+        left: 20px;
+        bottom: 20px;
+    }
+}
