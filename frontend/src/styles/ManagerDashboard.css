@@ -34,10 +34,6 @@ body, html{
     text-align: right;
 }
 
-.discount-box strong {
-    font-style: italic;
-    font-weight: 700;
-}
 
 .dumpling{
     position: absolute;
@@ -54,17 +50,3 @@ body, html{
     margin-bottom: 30px;
 }
 
-@media (max-width: 768px) {
-    .image-left, .image-right {
-        width: 150px;
-        bottom: 20px;
-    }
-    .welcome-message {
-        font-size: 2rem;
-    }
-    .discount-box {
-        font-size: 1.5rem;
-        left: 20px;
-        bottom: 20px;
-    }
-}
