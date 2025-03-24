@@ -1,0 +1,146 @@
+/* Tables Page Styling */
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap');
+
+.tables-page {
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    margin-top: 40px;
+    font-family: 'Amatic SC', cursive;
+    background-color: #f8f5ed;
+    text-align: center;
+}
+
+.tables-title {
+    font-size: 4.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 40px;
+}
+
+.add-table-section {
+    margin-bottom: 40px;
+    background-color: #f8f5ed;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.add-table-section h3 {
+    font-size: 3rem;
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.add-table-section input, .add-table-section select {
+    padding: 10px;
+    margin-right: 10px;
+    font-size: 2rem;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-family: 'Amatic SC', cursive;
+}
+
+.add-table-btn {
+    background-color: #e47b5e;
+    color: black;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    font-family: 'Amatic SC', cursive;
+}
+
+.add-table-btn:hover {
+    background-color: #d66849;
+}
+
+/* Tables List Styling */
+.tables-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.table-card {
+    background-color: white;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    width: 250px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table-card h3 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.table-card p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+/* Status Update Styling */
+.table-actions select {
+    padding: 10px;
+    font-size: 2rem;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    font-family: 'Amatic SC', cursive;
+}
+
+.update-status-btn {
+    background-color: #88BBAF;
+    color: black;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    font-family: 'Amatic SC', cursive;
+}
+
+.update-status-btn:hover {
+    background-color: #e0a800;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .tables-page {
+        width: 90%;
+    }
+
+    .tables-title {
+        font-size: 3rem;
+    }
+
+    .add-table-section h3, .add-table-section input, .add-table-section select, .add-table-btn {
+        font-size: 1.5rem;
+    }
+
+    .table-card h3, .table-card p {
+        font-size: 1.2rem;
+    }
+
+    .update-status-btn {
+        font-size: 1.2rem;
+        padding: 10px 20px;
+    }
+}

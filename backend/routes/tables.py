@@ -4,8 +4,8 @@ from utils import role_required
 
 tables_bp = Blueprint("tables", __name__)
 
-# Get all tables (Accessible to all)
 @tables_bp.route("/", methods=["GET"])
+@role_required(["manager"])
 def get_tables():
     cursor.execute("SELECT * FROM tables")
     return jsonify(cursor.fetchall()), 200
