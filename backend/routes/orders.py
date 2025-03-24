@@ -56,6 +56,29 @@ def place_order():
         db.rollback()
         return jsonify({"error": str(e)}), 500
 
+@orders_bp.route("/", methods=["GET"])
+@role_required(["manager"])
+def get_orders():
+    try:
+        cursor.execute("SELECT * FROM orders order by created_at desc")
+        orders = cursor.fetchall()
+        print("Fetched orders from DB:", orders)  # Add this to debug
+
+
+        order_list = [{
+            "order_id": order[0],
+            "customer_id": order[1],
+            "table_id": order[2],
+            "status": order[3],
+            "total_amount": order[4],
+            "created_at": order[5]
+        } for order in orders]
+
+        return jsonify(order_list), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    
+
 # Update order status (manager only)
 @orders_bp.route("/<int:order_id>/status", methods=["PUT"])
 @role_required(["manager"])

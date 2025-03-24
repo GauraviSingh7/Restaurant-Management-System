@@ -1,0 +1,131 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Orders Page */
+.orders-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin-top: 50px;
+    font-family: 'Amatic SC', cursive;
+}
+
+/* Title Styling */
+.orders-title {
+    font-size: 4.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Orders List */
+.orders-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 900px;
+}
+
+/* Individual Order Card */
+.order-card {
+    background: #f8f5ed;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 15px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    text-align: left;
+    transition: transform 0.3s ease;
+}
+
+.order-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Order Info */
+.order-card h3 {
+    font-size: 2rem;
+    color: #333;
+    margin: 0;
+    font-weight: bold;
+}
+
+.order-card p {
+    font-size: 1.2rem;
+    color: #555;
+    margin: 5px 0;
+}
+
+/* Order Status Dropdown and Update Button */
+.status-update {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.status-update select {
+    padding: 10px;
+    font-size: 1.2rem;
+    font-family: 'Amatic SC', cursive;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background-color: white;
+}
+
+.update-status-btn {
+    background-color: #88BBAF;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    font-family: 'Amatic SC', cursive;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 20px;
+    transition: background 0.3s ease;
+}
+
+.update-status-btn:hover {
+    background-color: #6b9471;
+}
+
+/* Loading and Error Messages */
+.loading, .error {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #555;
+    margin: 30px 0;
+}
+
+.error {
+    color: #ff6b6b;
+}
+
+/* No Orders Message */
+.no-orders {
+    font-size: 2rem;
+    color: #555;
+    text-align: center;
+    font-family: 'Amatic SC', cursive;
+    font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .orders-title {
+        font-size: 3rem;
+    }
+
+    .order-card {
+        width: 90%;
+    }
+
+    .status-update select, .update-status-btn {
+        font-size: 1rem;
+        padding: 8px 15px;
+    }
+}
