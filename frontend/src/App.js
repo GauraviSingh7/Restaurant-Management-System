@@ -12,7 +12,6 @@ import Staff from "./pages/Staff";
 import Inventory from "./pages/Inventory";
 import Payments from "./pages/Payments";
 import Tables from "./pages/Tables";
-import Users from "./pages/Users";
 import CustomerDashboard from "./pages/CustomerDashboard";
 import ManagerDashboard from "./pages/ManagerDashboard";
 import Welcome from "./pages/Welcome";
@@ -64,7 +63,6 @@ const DefaultRoutes = () => {
                 <Route path="/payments" element={role === "customer" || role === "manager" ? <Payments /> : <Navigate to="/" />} />
                 <Route path="/staff" element={role === "manager" ? <Staff /> : <Navigate to="/" />} />
                 <Route path="/inventory" element={role === "manager" ? <Inventory /> : <Navigate to="/" />} />
-                <Route path="/users" element={role === "manager" ? <Users /> : <Navigate to="/" />} />
             </Routes>
         </div>
     );
