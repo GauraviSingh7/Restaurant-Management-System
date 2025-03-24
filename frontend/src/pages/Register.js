@@ -86,7 +86,7 @@ const Register = () => {
                         Select a role
                     </option>
                     <option value="customer">Customer</option>
-                    <option value="manager">Manager</option>
+                    {/* <option value="manager">Manager</option> */}
                 </select>
                 <button className="register-btn" onClick={handleRegister}>
                     REGISTER

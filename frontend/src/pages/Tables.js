@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext"; 
 import "../styles/tables.css";  
+
 const Tables = () => {
     const { role, token } = useAuth(); 
     const [tables, setTables] = useState([]);
     const [newCapacity, setNewCapacity] = useState("");
-    const [newStatus, setNewStatus] = useState("available");
+    const [tableStatuses, setTableStatuses] = useState({});
 
     // Axios instance with token for authorization
     const authAxios = axios.create({
@@ -21,17 +22,27 @@ const Tables = () => {
 
     const fetchTables = () => {
         authAxios.get("/tables/")
-            .then(response => setTables(response.data))
+            .then(response => {
+                setTables(response.data);
+                // Initialize statuses for each table
+                const initialStatuses = response.data.reduce((acc, table) => {
+                    acc[table[0]] = table[2]; // Use current table status
+                    return acc;
+                }, {});
+                setTableStatuses(initialStatuses);
+            })
             .catch(error => console.error("Error fetching tables:", error));
     };
 
     // Add a new table
     const addTable = () => {
-        authAxios.post("/tables/", { capacity: newCapacity, status: newStatus })
+        authAxios.post("/tables/", { 
+            capacity: newCapacity, 
+            status: "available" 
+        })
             .then(response => {
                 alert(response.data.message);
                 setNewCapacity("");  // Clear the input
-                setNewStatus("available");  // Reset status
                 fetchTables();  // Refresh the table list
             })
             .catch(error => alert("Error adding table: " + error.response?.data?.error || "Failed to add table."));
@@ -47,6 +58,14 @@ const Tables = () => {
             .catch(error => alert("Error updating table status: " + error.response?.data?.error || "Failed to update table."));
     };
 
+    // Handle status change for a specific table
+    const handleStatusChange = (tableId, newStatus) => {
+        setTableStatuses(prev => ({
+            ...prev,
+            [tableId]: newStatus
+        }));
+    };
+
     return (
         <div className="tables-page">
             <h1 className="tables-title">Manage Tables</h1>
@@ -59,11 +78,6 @@ const Tables = () => {
                     value={newCapacity} 
                     onChange={(e) => setNewCapacity(e.target.value)} 
                 />
-                <select value={newStatus} onChange={(e) => setNewStatus(e.target.value)}>
-                    <option value="available">Available</option>
-                    <option value="occupied">Occupied</option>
-                    <option value="reserved">Reserved</option>
-                </select>
                 <button onClick={addTable} className="add-table-btn">Add Table</button>
             </div>
 
@@ -76,14 +90,19 @@ const Tables = () => {
 
                         <div className="table-actions">
                             <select 
-                                value={newStatus} 
-                                onChange={(e) => setNewStatus(e.target.value)}
+                                value={tableStatuses[table[0]] || table[2]} 
+                                onChange={(e) => handleStatusChange(table[0], e.target.value)}
                             >
                                 <option value="available">Available</option>
                                 <option value="occupied">Occupied</option>
                                 <option value="reserved">Reserved</option>
                             </select>
-                            <button onClick={() => updateTableStatus(table[0], newStatus)} className="update-status-btn">Update Status</button>
+                            <button 
+                                onClick={() => updateTableStatus(table[0], tableStatuses[table[0]])} 
+                                className="update-status-btn"
+                            >
+                                Update Status
+                            </button>
                         </div>
                     </div>
                 ))}

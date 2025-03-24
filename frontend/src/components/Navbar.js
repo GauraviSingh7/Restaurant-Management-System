@@ -1,18 +1,17 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";  // ✅ Import useAuth
+import { useAuth } from "../context/AuthContext"; 
 import "../App.css";
 
 const Navbar = () => {
     const navigate = useNavigate();
-    const { role, logout } = useAuth(); // Use logout method from context
+    const { role, logout } = useAuth(); 
 
     const handleLogout = () => {
-        logout(); // Use the logout method from AuthContext
+        logout(); 
         navigate("/login");
     };
 
-    // Determine the logo link based on role
     let logoLink = "/";
     if (role === "customer") {
         logoLink = "/dashboard";
@@ -32,7 +31,8 @@ const Navbar = () => {
                     {role === "manager" && <Link className="nav-link" to="/orders">Orders</Link>}
                     {role === "manager" && <Link className="nav-link" to="/tables">Tables</Link>}
                     {role === "manager" && <Link className="nav-link" to="/staff">Staff</Link>}
-                    {role === "manager" && <Link className="nav-link" to="/users">Users</Link>}
+                    {role === "manager" && <Link className="nav-link" to="/inventory">Inventory</Link>}
+
                     {!role ? (
                         <>
                             <Link className="nav-link" to="/login">Login</Link>

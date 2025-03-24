@@ -62,7 +62,7 @@ def get_orders():
     try:
         cursor.execute("SELECT * FROM orders order by created_at desc")
         orders = cursor.fetchall()
-        print("Fetched orders from DB:", orders)  # Add this to debug
+        # print("Fetched orders from DB:", orders)  # Add this to debug
 
 
         order_list = [{

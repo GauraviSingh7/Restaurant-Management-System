@@ -1,5 +1,5 @@
 import React, {useState } from "react";
-import { useLocation } from "react-router-dom";  // To get cart details from Cart page
+import { useLocation } from "react-router-dom";
 import "../styles/payments.css";
 import axios from "axios";
 

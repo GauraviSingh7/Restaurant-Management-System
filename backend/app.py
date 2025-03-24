@@ -7,6 +7,7 @@ from routes.orders import orders_bp
 from routes.reservations import reservations_bp
 from routes.tables import tables_bp
 from routes.payments import payments_bp
+from routes.staff import staff_bp
 from flask_cors import CORS
 import os
 from dotenv import load_dotenv
@@ -49,6 +50,7 @@ app.register_blueprint(orders_bp, url_prefix="/orders")
 app.register_blueprint(reservations_bp, url_prefix="/reservations")
 app.register_blueprint(tables_bp, url_prefix="/tables")
 app.register_blueprint(payments_bp, url_prefix="/payments")
+app.register_blueprint(staff_bp, url_prefix="/staff")
 
 if __name__ == "__main__":
     app.run(debug=True)

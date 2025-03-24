@@ -7,7 +7,7 @@ const CustomerDashboard = () => {
     return (
         <div className="customer-dashboard">
             
-            <h1 className="welcome-message">HEY, USERNAME</h1>
+            <h1 className="Cwelcome-message">HEY, USERNAME</h1>
             
             <img src={drinksImage} alt="Drinks" className="image-left" />
             <img src={pizzaImage} alt="Pizza" className="image-right" />

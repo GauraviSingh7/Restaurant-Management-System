@@ -1,0 +1,95 @@
+/* Staff Page Styling */
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap');
+
+.staff-page {
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    margin-top: 40px;
+    font-family: 'Amatic SC', cursive;
+    background-color: #f8f5ed;
+    text-align: center;
+}
+
+.staff-title {
+    font-size: 4.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 40px;
+}
+
+.add-staff-section {
+    margin-bottom: 40px;
+    background-color: #f8f5ed;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.add-staff-section h3 {
+    font-size: 3rem;
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.add-staff-section input, .add-staff-section select {
+    padding: 10px;
+    margin-right: 10px;
+    font-size: 2rem;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-family: 'Amatic SC', cursive;
+}
+
+.add-staff-btn {
+    background-color: #88BBAF;
+    color: black;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    font-family: 'Amatic SC', cursive;
+}
+
+.add-staff-btn:hover {
+    background-color: #5a9484;
+}
+
+/* Staff List Styling */
+.staff-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.staff-card {
+    background-color: white;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    width: 250px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.staff-card h3 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.staff-card p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
