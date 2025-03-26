@@ -39,4 +39,30 @@ def add_staff():
         db.rollback()
         return jsonify({"error": str(e)}), 500
         
-        
+@staff_bp.route("/<int:staff_id>", methods=["PUT"])
+@role_required(["manager"])
+def update_staff(staff_id):
+    data = request.get_json()
+    try:
+        sql = """
+            UPDATE staff
+            SET name = %s, role = %s, salary = %s, shift_timing = %s
+            WHERE staff_id = %s
+        """
+        cursor.execute(sql, (data["name"], data["role"], data["salary"], data["shift_timing"], staff_id))
+        db.commit()
+        return jsonify({"message": "Staff updated"}), 200
+    except Exception as e:
+        db.rollback()
+        return jsonify({"error": str(e)}), 500
+
+@staff_bp.route("/<int:staff_id>", methods=["DELETE"])
+@role_required(["manager"])
+def delete_staff(staff_id):
+    try:
+        cursor.execute("DELETE FROM staff WHERE staff_id = %s", (staff_id,))
+        db.commit()
+        return jsonify({"message": "Staff deleted"}), 200
+    except Exception as e:
+        db.rollback()
+        return jsonify({"error": str(e)}), 500
