@@ -11,8 +11,6 @@ const Menu = () => {
     const { role, token } = useAuth();
     const { addToCart } = useCart();  // Use cart and addToCart from context
 
-    console.log("Current Role:", role);
-    console.log("Current Token:", token);
 
     // Create axios instance with dynamic token handling
     const authAxios = axios.create({
