@@ -1,0 +1,217 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Inventory Page */
+.inventory-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin-top: 50px;
+    font-family: 'Amatic SC', cursive;
+}
+
+/* Title Styling */
+.inventory-title {
+    font-size: 4.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Inventory List - Grid Layout */
+.inventory-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    width: 100%;
+    font-weight: bold;
+    max-width: 900px;
+    justify-content: center;
+}
+
+/* Individual Inventory Card */
+.inventory-card {
+    background: #f8f5ed;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    transition: transform 0.3s ease;
+}
+
+.inventory-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Inventory Info */
+.inventory-card h3 {
+    font-size: 2rem;
+    color: #333;
+    margin: 0;
+    font-weight: bold;
+}
+
+.inventory-card p {
+    font-size: 1.2rem;
+    color: #555;
+    margin: 5px 0;
+}
+
+/* Edit Buttons */
+.Iedit-btn, .save-btn, .cancel-btn {
+    font-family: 'Amatic SC', cursive;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 10px;
+}
+
+.Iedit-btn {
+    background-color: #e47b5e;
+    color: black;
+}
+
+.edit-btn:hover {
+    background-color: #d17157;
+}
+
+.save-btn {
+    background-color: #4CAF50;
+    color: white;
+    margin-right: 10px;
+}
+
+.save-btn:hover {
+    background-color: #45a049;
+}
+
+.cancel-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.cancel-btn:hover {
+    background-color: #d32f2f;
+}
+
+/* Edit Inputs */
+.inventory-card input {
+    padding: 10px;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    width: 100%;
+    background-color: white;
+    font-family: 'Amatic SC', cursive;
+    margin-bottom: 10px;
+}
+
+.edit-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Add Inventory Form */
+.add-inventory-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.add-inventory-form input {
+    padding: 10px;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    width: 250px;
+    background-color: white;
+    font-family: 'Amatic SC', cursive;
+}
+
+.add-inventory-btn {
+    background-color: #88BBAF;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    font-family: 'Amatic SC', cursive;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 20px;
+    transition: background 0.3s ease;
+}
+
+.add-inventory-btn:hover {
+    background-color: #6b9471;
+}
+
+/* Loading and Error Messages */
+.loading, .error {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #555;
+    margin: 30px 0;
+}
+
+.error {
+    color: #ff6b6b;
+}
+
+/* No Inventory Message */
+.no-inventory {
+    font-size: 2rem;
+    color: #555;
+    text-align: center;
+    font-family: 'Amatic SC', cursive;
+    font-weight: bold;
+}
+
+/* Search Container */
+.search-container {
+    width: 100%;
+    max-width: 900px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background-color: white;
+    font-family: 'Amatic SC', cursive;
+    max-width: 500px;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #88BBAF;
+    box-shadow: 0 0 5px rgba(136, 187, 175, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .inventory-title {
+        font-size: 3rem;
+    }
+
+    .inventory-list {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .add-inventory-form input, .add-inventory-btn, .edit-btn, .save-btn, .cancel-btn {
+        font-size: 1rem;
+        padding: 8px 15px;
+    }
+}
