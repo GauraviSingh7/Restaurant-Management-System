@@ -146,7 +146,7 @@ const Payments = () => {
                     <td>{payment.payment_id}</td>
                     <td>{payment.order_id}</td>
                     {/* Ensure amount_paid is valid before calling toFixed */}
-                    <td>₹{(payment.amount_paid ? payment.amount_paid.toFixed(2) : "0.00")}</td> 
+                    <td>${(payment.amount_paid ? payment.amount_paid.toFixed(2) : "0.00")}</td> 
                     <td>{payment.payment_method}</td>
                     <td>{new Date(payment.payment_date).toLocaleString()}</td>
                   </tr>

@@ -69,8 +69,10 @@
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+  font-weight: bold;
   background-color: white;
   border-radius: 8px;
+  font-size: 20px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -108,7 +110,7 @@
   }
 
   .payments-table th, .payments-table td {
-    font-size: 14px;
+    font-size: 20px;
     padding: 8px;
   }
 }
