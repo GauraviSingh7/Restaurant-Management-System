@@ -78,7 +78,6 @@ def make_reservation():
         db.rollback()
         return jsonify({"error": str(e)}), 500
 
-
 @reservations_bp.route("/cancel/<int:reservation_id>", methods=["DELETE"])
 @jwt_required()
 @role_required(["customer"])
@@ -107,8 +106,6 @@ def cancel_reservation(reservation_id):
         db.rollback()
         return jsonify({"error": str(e)}), 500
 
-
-
 @reservations_bp.route("/<int:reservation_id>/status", methods=["PUT"])
 @jwt_required()
 @role_required(["manager"])
@@ -116,66 +113,124 @@ def update_reservation_status(reservation_id):
     try:
         data = request.get_json()
         new_status = data.get("status")
+        new_table_id = data.get("table_id")
 
         if not new_status:
             return jsonify({"error": "Missing status field"}), 400
 
-        cursor.execute("UPDATE reservations SET status=%s WHERE reservation_id=%s", (new_status, reservation_id))
+        # If a new table is specified, update the table
+        if new_table_id:
+            cursor.execute(
+                "UPDATE reservations SET status=%s, table_id=%s WHERE reservation_id=%s", 
+                (new_status, new_table_id, reservation_id)
+            )
+        else:
+            cursor.execute(
+                "UPDATE reservations SET status=%s WHERE reservation_id=%s", 
+                (new_status, reservation_id)
+            )
         db.commit()
 
         return jsonify({"message": "Reservation status updated"}), 200
 
     except Exception as e:
+        db.rollback()
         return jsonify({"error": str(e)}), 500
 
 @reservations_bp.route("/", methods=["GET"])
 @jwt_required()
-@role_required(["customer"])
-def get_user_reservations():
+def get_reservations():
     try:
-        print("Fetching user reservations...")  # Debug print
-
-        # Extract user ID from JWT token
+        # Extract user role and identity from JWT token
         current_user = get_jwt_identity()
         user_data = json.loads(current_user)
-        customer_email = user_data["email"]
+        user_role = user_data["role"]
+        user_email = user_data["email"]
 
-        # Get customer_id
-        cursor.execute("SELECT user_id FROM users WHERE email = %s", (customer_email,))
-        customer = cursor.fetchone()
-        if not customer:
-            print("Customer not found!")  # Debug print
-            return jsonify({"error": "Customer not found"}), 404
-        customer_id = customer[0]
+        # Get user_id
+        cursor.execute("SELECT user_id FROM users WHERE email = %s", (user_email,))
+        user = cursor.fetchone()
+        if not user:
+            return jsonify({"error": "User not found"}), 404
+        user_id = user[0]
 
-        # Fetch reservations along with table number
-        cursor.execute(
-            """
-            SELECT r.reservation_id, r.table_id, t.capacity, r.reservation_time, r.status
-            FROM reservations r
-            JOIN tables t ON r.table_id = t.table_id
-            WHERE r.customer_id = %s
-            ORDER BY r.reservation_time DESC
-            """,
-            (customer_id,)
-        )
+        # **Update past reservations to "completed"**
+        cursor.execute("""
+            UPDATE reservations 
+            SET status = 'completed' 
+            WHERE status = 'confirmed' AND reservation_time < NOW()
+        """)
+        db.commit()
+
+        # Fetch reservations based on role
+        if user_role == "manager":
+            # For managers, fetch all reservations with user details
+            cursor.execute(
+                """
+                SELECT 
+                    r.reservation_id, 
+                    r.table_id, 
+                    t.capacity, 
+                    r.reservation_time, 
+                    r.status,
+                    u.email AS customer_email
+                FROM 
+                    reservations r
+                JOIN 
+                    users u ON r.customer_id = u.user_id
+                JOIN 
+                    tables t ON r.table_id = t.table_id
+                ORDER BY 
+                    r.reservation_time DESC
+                """
+            )
+        else:
+            # For customers, fetch their own reservations
+            cursor.execute(
+                """
+                SELECT 
+                    r.reservation_id, 
+                    r.table_id, 
+                    t.capacity, 
+                    r.reservation_time, 
+                    r.status
+                FROM 
+                    reservations r
+                JOIN 
+                    tables t ON r.table_id = t.table_id
+                WHERE 
+                    r.customer_id = %s
+                ORDER BY 
+                    r.reservation_time DESC
+                """,
+                (user_id,)
+            )
+
         reservations = cursor.fetchall()
 
         # Convert result tuples to JSON objects
         reservations_list = []
-        for res in reservations:
-            reservations_list.append({
-                "reservation_id": res[0],
-                "table_id": res[1],
-                "capacity": res[2],
-                "reservation_time": res[3],
-                "status": res[4]
-            })
-
-        print("Reservations Fetched:", reservations_list)  # Debug print
+        if user_role == "manager":
+            for res in reservations:
+                reservations_list.append({
+                    "reservation_id": res[0],
+                    "table_id": res[1],
+                    "capacity": res[2],
+                    "reservation_time": res[3],
+                    "status": res[4],
+                    "customer_email": res[5]
+                })
+        else:
+            for res in reservations:
+                reservations_list.append({
+                    "reservation_id": res[0],
+                    "table_id": res[1],
+                    "capacity": res[2],
+                    "reservation_time": res[3],
+                    "status": res[4]
+                })
 
         return jsonify(reservations_list), 200
 
     except Exception as e:
-        print("Error:", str(e))  # Debug print
         return jsonify({"error": str(e)}), 500

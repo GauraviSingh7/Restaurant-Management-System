@@ -26,6 +26,7 @@ const Navbar = () => {
                 <div className="nav-links">
                     <Link className="nav-link" to="/menu">Menu</Link>
                     {role === "customer" && <Link className="nav-link" to="/reservations">Reservations</Link>}
+                    {role === "manager" && <Link className="nav-link" to="/reservations">Reservations</Link>}
                     {role === "customer" && <Link className="nav-link" to="/cart">Cart</Link>}
                     {role === "customer" && <Link className="nav-link" to="/payments">Payments</Link>}
                     {role === "manager" && <Link className="nav-link" to="/orders">Orders</Link>}

@@ -53,8 +53,6 @@ const Orders = () => {
                                 <p>Customer ID: {order.customer_id}</p>
                                 <p>Total Amount: {!isNaN(totalAmount) ? `$${totalAmount.toFixed(2)}` : "N/A"}</p>
                                 <p>Status: {order.status}</p>
-                                <p>Table ID: {order.table_id}</p>
-
                                 <div className="status-update">
                                     <select 
                                         value={statusMap[order.order_id] || ""} 

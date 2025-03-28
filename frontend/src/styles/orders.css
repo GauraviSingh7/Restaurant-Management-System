@@ -23,7 +23,9 @@
 /* Orders List */
 .orders-list {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap; /* Correct way to allow wrapping */
+    justify-content: center;
+    gap: 20px;
     align-items: center;
     width: 100%;
     max-width: 900px;
@@ -36,7 +38,7 @@
     padding: 20px;
     margin: 15px 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 100%;
+    width: 45%; /* Make sure this fits within the flexbox container */
     text-align: left;
     transition: transform 0.3s ease;
 }
@@ -81,7 +83,7 @@
     color: black;
     border: none;
     padding: 10px 20px;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-family: 'Amatic SC', cursive;
     cursor: pointer;
     font-weight: bold;
@@ -121,7 +123,7 @@
     }
 
     .order-card {
-        width: 90%;
+        width: 90%; /* Change width for smaller screens */
     }
 
     .status-update select, .update-status-btn {

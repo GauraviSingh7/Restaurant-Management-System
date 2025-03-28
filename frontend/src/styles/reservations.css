@@ -1,9 +1,10 @@
+/* Import Font */
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Roboto:wght@100..900&family=Yrsa:wght@300..700&display=swap');
 
 body, html {
     margin: 0;
     padding: 0;
-    font-family: 'Amatic SC';
+    font-family: 'Amatic SC',cursive;
     background-color: #f8f5ed; /* Matches other pages */
 }
 
@@ -11,54 +12,21 @@ body, html {
 .reservations-container {
     margin-top: 50px;
     justify-content: space-between;
-    font-family: 'Amatic SC';
+    font-family: 'Amatic SC', cursive;
     align-items: center;
     padding: 2rem;
     font-size: 18px;
 }
 
-/* Left Section - Booking Form */
-/* .reservations-form-container {
-    max-width: 450px;
-    background: white;
-    padding: 2rem;
-    display: block;
-    margin-left: 500px;
-    align-items: center;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-} */
-
+/* Title */
 .reservations-title {
-    font-size: 60px;
+    font-size: 4rem;
     font-weight: bold;
-    font-size: 5rem;
     margin-bottom: 2rem;
     text-align: center;
     color: #333;
 }
 
-/* Labels */
-.reservations-label {
-    font-size: 24px;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-    display: block;
-}
-
-/* Inputs */
-.reservations-input {
-    width: 100%;
-    padding: 0.8rem;
-    font-size: 18px;
-    border: 2px solid #88BBAF;
-    border-radius: 5px;
-    margin-bottom: 1rem;
-}
-
-.reservations-input:focus {
-    border-color: #88BBAF;
-}
 
 .reservations-buttons {
     display: flex;
@@ -83,6 +51,38 @@ body, html {
     text-align: center;
 }
 
+.reservations-form-container {
+    max-width: 450px;
+    background: white;
+    padding: 2rem;
+    display: block;
+    margin-left: 500px;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative; /* Add this */
+}
+
+.reservations-label {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.reservations-input {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 18px;
+    border: 2px solid #88BBAF;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.reservations-input:focus {
+    border-color: #88BBAF;
+}
+
 .reservations-reserve-btn{
     width: 30%;
     padding: 0.8rem;
@@ -99,50 +99,6 @@ body, html {
     margin-left: 130px;
 }
 
-.reservations-btn:hover {
-    background-color: #5a9484;
-}
-
-/* Right Section - Reservations List */
-.reservations-right {
-    flex: 1.2;
-    max-width: 550px;
-}
-
-/* Toggle Buttons */
-.reservations-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 1rem;
-}
-
-.reservations-toggle-btn {
-    background-color: #88BBAF;
-    color: black;
-    border: none;
-    padding: 12px 20px;
-    font-size: 20px;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.reservations-toggle-btn:hover {
-    background-color: #7aab9f;
-}
-
-/* Reservation Items */
-.reservations-item {
-    background-color: #f8f5ed;
-    padding: 1rem;
-    border-left: 5px solid #88BBAF;
-    border-radius: 5px;
-    margin-bottom: 1rem;
-}
-
-/* Reserved Table Section */
-/* Reserved Table Section - Updated */
 .reservation-details {
     background-color: #88BBAF;
     color: black;
@@ -158,18 +114,114 @@ body, html {
     transform: translateY(-50%);
 }
 
-/* Make the form container position relative */
-.reservations-form-container {
-    max-width: 450px;
-    background: white;
-    padding: 2rem;
-    display: block;
-    margin-left: 500px;
+
+.reservations-list {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    position: relative; /* Add this */
 }
+
+.reservations-cancel-btn{
+    background-color: #d13c32;
+    border:none;
+    color: white;
+}
+
+.Upcomingreservations-item, .reservations-item {
+    background-color: #f8f5ed;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+
+
+/*------------------------------------------------------------------------------------------------------*/
+.Mreservations-list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+.Mreservations-list h3 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Grid Layout for Manager View */
+.Mreservations-group {
+    display: flex;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Dynamic column size */
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Individual Reservation Card */
+.Mreservations-item {
+    background-color: #f8f5ed;
+    padding: 1.5rem;
+    border-radius: 5px;
+    font-size: 1.3rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    margin-bottom: 20px;
+}
+
+/* Card Hover Effect */
+.Mreservations-item:hover {
+    transform: translateY(-5px);
+}
+
+/* Buttons in Reservation Card */
+.Mreservations-update-btn, .Mreservations-cancel-btn {
+    width: 48%;
+    padding: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 3px;
+    border:none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 10px;
+}
+
+.Mreservations-cancel-btn {
+    background-color: #d13c32;
+    color: white;
+}
+
+.Mreservations-cancel-btn:hover {
+    background-color: #d32f2f;
+}
+
+.Mreservations-update-btn {
+    background-color: #38853b;
+    color: white;
+    margin-right: 3px;
+}
+
+.Mreservations-update-btn:hover {
+    background-color: #45a049;
+}
+
+/* Search Bar */
+.reservations-search-bar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.reservations-search-bar input {
+    width: 50%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
 
 /* Error Message */
 .reservations-error {
@@ -178,25 +230,20 @@ body, html {
     font-size: 16px;
 }
 
-.reservations-cancel-btn {
-    background-color: #d9534f;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    margin-top: 10px;
+.reservations-search {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background-color: white;
+    font-family: 'Amatic SC', cursive;
+    margin-bottom: 20px;
+    max-width: 500px;
 }
 
-.reservations-cancel-btn:hover {
-    background-color: #c9302c;
-}
-
-.reservations-list{
-    margin-left: 650px;
-}
-.h3{
-    font-weight: bold;
+.reservations-search:focus {
+    outline: none;
+    border-color: #88BBAF;
+    box-shadow: 0 0 5px rgba(136, 187, 175, 0.5);
 }

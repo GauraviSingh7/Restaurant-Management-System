@@ -15,7 +15,7 @@ import Tables from "./pages/Tables";
 import CustomerDashboard from "./pages/CustomerDashboard";
 import ManagerDashboard from "./pages/ManagerDashboard";
 import Welcome from "./pages/Welcome";
-import Cart from "./pages/Cart";  // Import Cart page
+import Cart from "./pages/Cart"; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 
