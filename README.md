@@ -32,7 +32,7 @@ cd Restaurant-Management-System/backend
 python -m venv venv
 source venv/bin/activate  # On Windows use `venv\Scripts\activate`
 
-# Install dependencies (will be added soon)
+# Install dependencies - for Flask backend
 pip install -r requirements.txt
 
 # Set up database (Update MySQL credentials in .env file)
@@ -66,5 +66,4 @@ Tables included:
 - **Reservations** (Table bookings)
 - **Payments** (Transaction records)
 
-### A work in progress still.
 
