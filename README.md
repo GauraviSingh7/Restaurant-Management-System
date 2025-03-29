@@ -16,6 +16,8 @@ A full-stack Restaurant Management System built using **Flask (backend), React (
 - **Backend**: Flask
 - **Database**: MySQL
 
+###Refer database.md for details and changes made to the db.
+
 ## Installation
 ### Prerequisites
 - Python 3.x
