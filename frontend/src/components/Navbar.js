@@ -12,12 +12,7 @@ const Navbar = () => {
         navigate("/login");
     };
 
-    let logoLink = "/";
-    if (role === "customer") {
-        logoLink = "/dashboard";
-    } else if (role === "manager") {
-        logoLink = "/dashboard";
-    }
+    const logoLink = role ? "/dashboard" : "/";
 
     return (
         <nav className="navbar">
@@ -25,14 +20,24 @@ const Navbar = () => {
                 <Link className="logo" to={logoLink}>PG'S</Link>
                 <div className="nav-links">
                     <Link className="nav-link" to="/menu">Menu</Link>
-                    {role === "customer" && <Link className="nav-link" to="/reservations">Reservations</Link>}
-                    {role === "manager" && <Link className="nav-link" to="/reservations">Reservations</Link>}
-                    {role === "customer" && <Link className="nav-link" to="/cart">Cart</Link>}
-                    {role === "customer" && <Link className="nav-link" to="/payments">Payments</Link>}
-                    {role === "manager" && <Link className="nav-link" to="/orders">Orders</Link>}
-                    {role === "manager" && <Link className="nav-link" to="/tables">Tables</Link>}
-                    {role === "manager" && <Link className="nav-link" to="/staff">Staff</Link>}
-                    {role === "manager" && <Link className="nav-link" to="/inventory">Inventory</Link>}
+
+                    {role === "customer" && (
+                        <>
+                            <Link className="nav-link" to="/reservations">Reservations</Link>
+                            <Link className="nav-link" to="/cart">Cart</Link>
+                            <Link className="nav-link" to="/payments">Payments</Link>
+                        </>
+                    )}
+
+                    {role === "manager" && (
+                        <>
+                            <Link className="nav-link" to="/reservations">Reservations</Link>
+                            <Link className="nav-link" to="/orders">Orders</Link>
+                            <Link className="nav-link" to="/tables">Tables</Link>
+                            <Link className="nav-link" to="/staff">Staff</Link>
+                            <Link className="nav-link" to="/inventory">Inventory</Link>
+                        </>
+                    )}
 
                     {!role ? (
                         <>
