@@ -56,7 +56,8 @@
 }
 
 .order-card p {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+    font-weight: bold;
     color: #555;
     margin: 5px 0;
 }
@@ -130,4 +131,9 @@
         font-size: 1rem;
         padding: 8px 15px;
     }
+}
+
+ul{
+    font-weight: bold;
+    font-size: 1.5rem;
 }

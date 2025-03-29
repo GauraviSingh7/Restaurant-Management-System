@@ -96,3 +96,63 @@ def update_order_status(order_id):
     except Exception as e:
         db.rollback()
         return jsonify({"error": str(e)}), 500
+
+@orders_bp.route("/order_history", methods=["GET"])
+@jwt_required()
+@role_required(["customer"])
+def get_order_history():
+    current_user = get_jwt_identity()
+    user_data = json.loads(current_user)
+    customer_email = user_data["email"]
+
+    # Get customer_id from the users table based on the email
+    cursor.execute("SELECT user_id FROM users WHERE email = %s", (customer_email,))
+    customer = cursor.fetchone()
+
+    if not customer:
+        return jsonify({"error": "Customer not found"}), 404
+
+    customer_id = customer[0]
+
+    try:
+        # Fetch order details along with ordered items
+        sql = """
+            SELECT 
+                o.order_id, o.status, o.total_amount, o.created_at,
+                oi.menu_id, m.name AS menu_item_name, oi.quantity, oi.price
+            FROM orders o
+            LEFT JOIN order_items oi ON o.order_id = oi.order_id
+            LEFT JOIN menu m ON oi.menu_id = m.menu_id
+            WHERE o.customer_id = %s
+            ORDER BY o.created_at DESC;
+        """
+        cursor.execute(sql, (customer_id,))
+        orders_data = cursor.fetchall()
+
+        # Organizing orders into a structured format
+        orders_dict = {}
+
+        for row in orders_data:
+            order_id = row[0]
+
+            if order_id not in orders_dict:
+                orders_dict[order_id] = {
+                    "order_id": order_id,
+                    "status": row[1],
+                    "total_amount": row[2],
+                    "created_at": row[3],
+                    "items": []
+                }
+
+            if row[4]:  # Only add items if they exist (handle potential NULL cases)
+                orders_dict[order_id]["items"].append({
+                    "menu_id": row[4],
+                    "name": row[5],
+                    "quantity": row[6],
+                    "price": row[7]
+                })
+
+        return jsonify(list(orders_dict.values())), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500

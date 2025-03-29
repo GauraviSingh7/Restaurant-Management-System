@@ -66,6 +66,7 @@ const DefaultRoutes = () => {
                 {/* Customer-Specific Routes */}
                 {role === "customer" && (
                     <>
+                        <Route path="/order_history" element={<Orders />} />
                         <Route path="/cart" element={<Cart />} />
                         <Route path="/payments" element={<Payments />} />
                         <Route path="/reservations" element={<Reservations />} />
