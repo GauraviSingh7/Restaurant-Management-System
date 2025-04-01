@@ -55,7 +55,7 @@ const Menu = () => {
             return;
         }
 
-        authAxios.post("/menu", newItem)
+        authAxios.post("http://127.0.0.1:5000/menu/", newItem)
             .then(response => {
                 alert(response.data.message);
                 fetchMenuItems(selectedCategory); // Refresh menu
