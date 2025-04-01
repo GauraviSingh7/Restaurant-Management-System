@@ -1,10 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap');
 
-body, html{
+body, html {
     margin: 0;
     padding: 0;
-    /* overflow: hidden; */
-  }
+}
 
 .customer-dashboard {
     position: relative;
@@ -12,12 +11,14 @@ body, html{
     background-color: #f8f5ed;
     display: flex;
     flex-direction: column;
-    align-items: center;
     text-align: center;
     font-family: 'Amatic SC', cursive;
 }
 
-.bold-word { font-weight: bold; }
+.bold-word {
+    font-weight: bold;
+}
+
 .Cwelcome-message {
     font-size: 5rem;
     font-weight: bold;
@@ -52,17 +53,44 @@ body, html{
     margin-bottom: 30px;
 }
 
+/* Styling for new info boxes */
+.info-box {
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    width: 60%;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.info-box h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
 @media (max-width: 768px) {
     .image-left, .image-right {
         width: 150px;
         bottom: 20px;
     }
-    .welcome-message {
+    
+    .Cwelcome-message {
         font-size: 2rem;
     }
+
     .discount-box {
         font-size: 1.5rem;
         left: 20px;
         bottom: 20px;
+    }
+
+    .info-box {
+        width: 80%;
+        font-size: 1.5rem;
+    }
+
+    .info-box h2 {
+        font-size: 2rem;
     }
 }

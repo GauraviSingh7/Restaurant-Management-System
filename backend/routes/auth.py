@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, session
 from db import cursor, db
 import bcrypt
-from flask_jwt_extended import create_access_token;
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity;
 import json 
 
 
@@ -65,3 +65,25 @@ def login():
         "role": db_role,
         "access_token": access_token  # Send token in response
     }), 200
+
+
+@auth_bp.route('/username', methods=['GET'])
+@jwt_required()
+def get_username():
+    try:
+        # Get user email from JWT
+        current_user = get_jwt_identity()
+        user_data = json.loads(current_user)
+        email = user_data["email"]
+
+        # Fetch the username from the database
+        cursor.execute("SELECT username FROM users WHERE email = %s", (email,))
+        user = cursor.fetchone()
+
+        if not user:
+            return jsonify({"error": "User not found"}), 404
+
+        return jsonify({"username": user[0]}), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
