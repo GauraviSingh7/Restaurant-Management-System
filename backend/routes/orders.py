@@ -34,10 +34,12 @@ def place_order():
     try:
         # Step 1: Insert the order into the orders table
         sql_order = """
-            INSERT INTO orders (customer_id, table_id, status, total_amount, created_at)
-            VALUES (%s, %s, %s, %s, NOW())
+            INSERT INTO orders (customer_id, status, total_amount, created_at, table_id)
+            VALUES (%s, %s, %s, NOW(), %s)
         """
-        cursor.execute(sql_order, (customer_id, data.get("table_id"), "Pending", data["total_amount"]))
+        table_id = data.get("table_id")  # Get table_id from the request data
+
+        cursor.execute(sql_order, (customer_id, "Pending", data["total_amount"], table_id))
         order_id = cursor.lastrowid  # Get the ID of the newly inserted order
         db.commit()
 
@@ -52,7 +54,9 @@ def place_order():
 
         return jsonify({"message": "Order placed", "order_id": order_id}), 201
     except Exception as e:
-        print("couldn't place order")
+        import traceback
+        print("Couldn't place order")
+        print(traceback.format_exc())  # This prints the full error stack trace
         db.rollback()
         return jsonify({"error": str(e)}), 500
 
@@ -66,12 +70,12 @@ def get_orders():
 
 
         order_list = [{
-            "order_id": order[0],
-            "customer_id": order[1],
-            "table_id": order[2],
-            "status": order[3],
-            "total_amount": order[4],
-            "created_at": order[5]
+            "order_id": order[0],              # order_id
+            "customer_id": order[1],           # customer_id
+            "status": order[2],                # status
+            "total_amount": order[3],          # total_amount
+            "created_at": order[4],            # created_at
+            "table_id": order[5]               # table_id
         } for order in orders]
 
         return jsonify(order_list), 200
